@@ -1,0 +1,28 @@
+<VirtualHost 127.0.0.1:81>
+  ServerName  www.DOMAIN
+  ServerAdmin manager@DOMAIN
+  DocumentRoot /srv/www/DOMAIN/public/
+
+  <Directory /srv/www/DOMAIN/public/>
+    Options FollowSymLinks MultiViews
+    AllowOverride All
+    Order allow,deny
+    allow from all
+  </Directory>
+
+  ErrorLog /srv/www/DOMAIN/error.log
+  LogLevel warn
+  CustomLog /srv/www/DOMAIN/access.log combined
+
+  ErrorDocument 404 /404/
+
+  SetOutputFilter DEFLATE
+  SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|ico|png)$ \ no-gzip dont-vary
+  SetEnvIfNoCase Request_URI \.(?:exe|t?gz|zip|bz2|sit|rar)$ \no-gzip dont-vary
+  SetEnvIfNoCase Request_URI \.pdf$ no-gzip dont-vary
+
+  BrowserMatch ^Mozilla/4 gzip-only-text/html
+  BrowserMatch ^Mozilla/4\.0[678] no-gzip
+  BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+
+</VirtualHost>

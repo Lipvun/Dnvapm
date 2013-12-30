@@ -1,0 +1,10 @@
+server {
+    listen 80 default_server; ## listen for ipv4
+#    listen 443 default_server ssl; ## listen for ipv4
+#    listen [::]:80 default_server ipv6only=on; ## listen for ipv6
+#    listen [::]:443 default_server ipv6only=on ssl; ## listen for ipv6
+	server_name _;
+#    access_log  /var/log/nginx/default.log main;
+#    ssl_ciphers "ALL:!aNULL:!RC4";
+    return 444;
+}

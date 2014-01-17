@@ -17,9 +17,6 @@ backend default {
 # appended to your code.
  sub vcl_recv {
 
-	if (req.http.host ~ "^www.DOMAIN") {
-	        set req.http.host = "DOMAIN";
-	}
 #首次访问增加 X-Forwarded-For 头信息,方便后端程序获取客户端 ip
     if (req.restarts == 0) {
         #如果设置过此 header 则要再次附加上,用,隔开,如果

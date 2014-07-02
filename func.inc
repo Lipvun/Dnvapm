@@ -277,6 +277,9 @@ function conf_varnish {
 		rm -f /etc/varnish/default.vcl
 		cp ./conf/varnish/varnish /etc/varnish/default.vcl
 	fi
+	if [ -f /etc/default/varnish ]; then
+		sed -i "s/-a :6081/-a localhost:6081/g" /etc/default/varnish
+	fi
 	invoke-rc.d varnish restart
 }
 

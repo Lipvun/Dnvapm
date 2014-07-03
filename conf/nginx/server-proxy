@@ -7,6 +7,11 @@ server {
 
 	access_log  /srv/www/DOMAIN/access.log;
 	error_log  /srv/www/DOMAIN/error.log;
+	
+	if ($host = 'DOMAIN'){
+                rewrite ^/(.*)$ http://www.DOMAIN/$1 permanent;
+        }
+
 
 	location / {
 		try_files $uri @varnish;
